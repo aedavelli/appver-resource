@@ -16,16 +16,16 @@ Implements a resource that passes to a task the version and different meta data.
 
 * `url`: *Required.* URL which produces version info in one of the JSON/XML/TEXT formats.
 
-* `version_field`: *Optional.* in general. *Required* if response is JSON/XML. The level is separated by *::* 2 colons. 
+* `version_field`: *Optional.* in general. *Required* if response is JSON/XML. The level is separated by *::* 2 colons.
 ```json
 {
   "version_info" : {
     "git" : {
-	  "version" : "2a3b4e",
-	  "branch" : "release",
-	  "tag" : "v1.1.1",
-	  "url" : "https://github.com/aedavelli/appver-resource"
-	}
+      "version" : "2a3b4e",
+      "branch" : "release",
+      "tag" : "v1.1.1",
+      "url" : "https://github.com/aedavelli/appver-resource"
+    }
   }
 }
  ```
@@ -45,16 +45,16 @@ resource_types:
     type: docker-image
     source:
       repository: avsr/appver-resource
-      
+
 resources:
   - name: appver
     type: appver
-	source:
+    source:
       url: http://192.168.1.13:8282/version
-	  version_field: "version_info::git::version"
-	  accept: "application/json"	
-	  username: ((webapp.username))
-	  username: ((webapp.password))
+      version_field: "version_info::git::version"
+      accept: "application/json"
+      username: ((webapp.username))
+      username: ((webapp.password))
 
 jobs:
 - name: some-job
@@ -67,12 +67,12 @@ jobs:
       image_resource:
         type: docker-image
         source: {repository: busybox}
-	  # appver directory contains key(filename), value(data inside file)	
+      # appver directory contains key(filename), value(data inside file)
       inputs:
         - name: test-repo
         - name: appver
-	  run:
-	    # do your work here
+      run:
+        # do your work here
 ```
 
 ## Behavior
@@ -86,7 +86,7 @@ When no version/latest version  specified, latest version will be returned. If o
 For above mentioned json response below files and content in appver directory
 
 File|Content|
---- | --- 
+--- | ---
 appver/version | 2a3b4e
 appver/branch | release
 appver/tag | v1.1.1
