@@ -1,8 +1,9 @@
 
-[![Docker Stars](https://img.shields.io/docker/stars/avsr/appver-resource.svg?style=plastic)](https://registry.hub.docker.com/v2/repositories/avsr/appver-resource/stars/count/)
-[![Docker pulls](https://img.shields.io/docker/pulls/avsr/appver-resource.svg?style=plastic)](https://registry.hub.docker.com/v2/repositories/avsr/appver-resource)
-[![Docker build status](https://img.shields.io/docker/build/avsr/appver-resource.svg)](https://github.com/aedavelli/appver-resource)
-[![Docker Automated build](https://img.shields.io/docker/automated/avsr/appver-resource.svg)](https://github.com/aedavelli/appver-resource)
+[![Docker Stars](https://img.shields.io/docker/stars/avsr/appver-resource.svg?style=plastic&logo=docker&label=stars)](https://registry.hub.docker.com/v2/repositories/avsr/appver-resource/stars/count/)
+[![Docker pulls](https://img.shields.io/docker/pulls/avsr/appver-resource.svg?style=plastic&logo=docker&label=pulls)](https://registry.hub.docker.com/v2/repositories/avsr/appver-resource)
+[![Docker build status](https://img.shields.io/docker/cloud/build/avsr/appver-resource.svg?logo=docker&style=plastic&label=build)](https://github.com/aedavelli/appver-resource)
+[![Docker Automated build](https://img.shields.io/docker/cloud/automated/avsr/appver-resource.svg?logo=docker&label=build)](https://github.com/aedavelli/appver-resource)
+[![Docker Size](https://img.shields.io/docker/image-size/avsr/appver-resource/latest?label=size&logo=docker&style=plastic)](https://hub.docker.com/r/avsr/appver-resource/)
 
 [![dockeri.co](http://dockeri.co/image/avsr/appver-resource)](https://hub.docker.com/r/avsr/appver-resource/)
 
@@ -69,7 +70,6 @@ jobs:
         source: {repository: busybox}
       # appver directory contains key(filename), value(data inside file)
       inputs:
-        - name: test-repo
         - name: appver
       run:
         # do your work here
