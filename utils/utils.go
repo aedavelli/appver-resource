@@ -171,7 +171,7 @@ func ParseResponse(s models.Source, res *http.Response) map[string]string {
 	var ctypes = res.Header[http.CanonicalHeaderKey("content-type")]
 	var ctype = ""
 	if len(ctypes) > 0 {
-		ctype = ctypes[0]
+		ctype = strings.Split(ctypes[0], ";")[0]
 	}
 	if ctype == "" || s.VersionField == "" {
 		ctype = "text/plain"
