@@ -34,4 +34,5 @@ type Source struct {
 	UserName     string `json:"username"`
 	Password     string `json:"password"`
 	Accept       string `json:"accept"`
+	Insecure     bool   `json:"insecure"`
 }

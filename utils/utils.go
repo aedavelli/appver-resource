@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"crypto/tls"
 	"encoding/json"
 	"encoding/xml"
 	"fmt"
@@ -52,6 +53,12 @@ func Fatal(a ...interface{}) {
 
 func GetHttpVersion(s models.Source) *http.Response {
 	client := &http.Client{}
+	if s.Insecure {
+		tr := &http.Transport{
+			TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+		}
+		client = &http.Client{Transport: tr}
+	}
 	httpReq, err := http.NewRequest("GET", s.Url, nil)
 	if err != nil {
 		Fatal(err)

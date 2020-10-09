@@ -114,6 +114,7 @@ var _ = Describe("Check", func() {
 		Context("when version control is hg", func() {
 			BeforeEach(func() {
 				request.Source.VersionField = "version_info::hg::version"
+				request.Source.Insecure = true
 			})
 
 			It("Check Version fron response Url and size", func() {

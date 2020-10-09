@@ -55,7 +55,9 @@ resources:
       version_field: "version_info::git::version"
       accept: "application/json"
       username: ((webapp.username))
-      username: ((webapp.password))
+      password: ((webapp.password))
+      insecure: true
+
 
 jobs:
 - name: some-job
