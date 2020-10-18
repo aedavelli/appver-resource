@@ -57,6 +57,7 @@ resources:
       username: ((webapp.username))
       password: ((webapp.password))
       insecure: true
+      redact: true
 
 
 jobs:

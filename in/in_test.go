@@ -177,9 +177,18 @@ var _ = Describe("In", func() {
 		Context("when version control is svn", func() {
 			BeforeEach(func() {
 				request.Source.VersionField = "Info::version_info::svn::version"
+				request.Source.Redact = true
 			})
 
 			It("writes the requested data the destination", func() {
+				if request.Source.Redact {
+					checkPropRedacted(destination, "version", "***********", response.Metadata)
+					checkPropRedacted(destination, "change_count", "***********", response.Metadata)
+					checkPropRedacted(destination, "commit", "***********", response.Metadata)
+					checkPropRedacted(destination, "repo", "***********", response.Metadata)
+					checkPropRedacted(destination, "name", "***********", response.Metadata)
+					return
+				}
 				checkProp(destination, "version", version_svn, response.Metadata)
 				checkProp(destination, "change_count", change_count, response.Metadata)
 				checkProp(destination, "commit", commit, response.Metadata)
@@ -215,6 +224,25 @@ func checkProp(destination, prop, valueToCheck string, meta models.Metadata) {
 	Expect(err).NotTo(HaveOccurred())
 	val := string(file)
 	Expect(val).To(Equal(valueToCheck))
+	found := false
+	for _, v := range meta {
+		if v.Name == prop {
+			found = true
+			Expect(v.Value).To(Equal(valueToCheck))
+		}
+	}
+
+	if !found {
+		Fail(fmt.Sprintf("%s not found in metadata", prop))
+	}
+}
+
+func checkPropRedacted(destination, prop, valueToCheck string, meta models.Metadata) {
+	output := filepath.Join(destination, prop)
+	file, err := ioutil.ReadFile(output)
+	Expect(err).NotTo(HaveOccurred())
+	val := string(file)
+	Expect(val).NotTo(Equal(valueToCheck))
 	found := false
 	for _, v := range meta {
 		if v.Name == prop {

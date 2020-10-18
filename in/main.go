@@ -50,8 +50,12 @@ func generateMeta(s models.Source, destination string) models.Metadata {
 	metadata := models.Metadata{}
 
 	for key, val := range m {
+		metaval := val
+		if s.Redact {
+			metaval = "***********"
+		}
 		metadata = append(metadata,
-			models.MetadataField{Name: key, Value: val})
+			models.MetadataField{Name: key, Value: metaval})
 		createFile(destination, key, val)
 	}
 	return metadata

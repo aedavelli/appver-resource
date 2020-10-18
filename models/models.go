@@ -35,4 +35,5 @@ type Source struct {
 	Password     string `json:"password"`
 	Accept       string `json:"accept"`
 	Insecure     bool   `json:"insecure"`
+	Redact       bool   `json:"redact"`
 }
